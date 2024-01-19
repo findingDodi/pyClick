@@ -27,7 +27,7 @@ class ClickApp:
         @self.app.route('/api/increment-clicks')
         def increment_clicks():
             self.increment_clicks()
-            return self.get_clicks()
+            return ''
 
         @self.app.route('/api/get-clicks')
         def get_clicks():
