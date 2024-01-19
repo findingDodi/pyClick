@@ -1,6 +1,7 @@
 import flask
 from datetime import datetime
 import os
+import time
 
 
 class ClickApp:
@@ -26,6 +27,7 @@ class ClickApp:
         @self.app.route('/api/increment-clicks')
         def increment_clicks():
             self.increment_clicks()
+            return self.get_clicks()
 
         @self.app.route('/api/get-clicks')
         def get_clicks():
@@ -43,7 +45,6 @@ class ClickApp:
             file_handle.close()
             return file_content
 
-
     def get_clicks(self):
         if not os.path.isfile(ClickApp.CLICKS_DATA):
             self.set_clicks(0)
@@ -51,6 +52,7 @@ class ClickApp:
         file_handle = open(ClickApp.CLICKS_DATA, "r")
         file_content = file_handle.read()
         file_handle.close()
+        print('Test', file_content)
 
         return file_content
 
