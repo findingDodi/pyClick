@@ -24,4 +24,5 @@ function updateClicks(updatesClicks) {
     CLICKS.innerText = updatesClicks;
 }
 
-CLICK_BUTTON.addEventListener('click', incrementClicks)
+CLICK_BUTTON.addEventListener('click', incrementClicks);
+setInterval(getClicks, 1000);
