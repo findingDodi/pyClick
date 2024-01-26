@@ -1,7 +1,6 @@
 import flask
 from datetime import datetime
 import os
-import time
 
 
 class ClickApp:
@@ -28,9 +27,9 @@ class ClickApp:
         @self.app.route('/clicker_post', methods=['GET', 'POST'])
         def clicker_post():
             increment_clicks_post = flask.request.form.get("increment-clicks-post")
-            print(increment_clicks_post)
             if increment_clicks_post:
                 self.increment_clicks()
+
             return flask.render_template('clicker_post.j2', clicks=self.get_clicks())
 
         @self.app.route('/date')
@@ -65,11 +64,11 @@ class ClickApp:
         file_handle = open(ClickApp.CLICKS_DATA, "r")
         file_content = file_handle.read()
         file_handle.close()
-        print('Test', file_content)
 
         return file_content
 
-    def set_clicks(self, clicks):
+    @staticmethod
+    def set_clicks(clicks):
         file_handle = open(ClickApp.CLICKS_DATA, "w")
         file_handle.write(str(clicks))
         file_handle.close()
