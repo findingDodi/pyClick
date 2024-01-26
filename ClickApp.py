@@ -16,9 +16,17 @@ class ClickApp:
         self.app.run(port=port, debug=debug)
 
     def setup_routes(self):
+
         @self.app.route('/')
         def index():
-            return flask.render_template('clicker.j2', clicks=self.get_clicks())
+            return flask.render_template('home.j2', clicks=self.get_clicks())
+        @self.app.route('/clicker_js')
+        def clicker_js():
+            return flask.render_template('clicker_js.j2', clicks=self.get_clicks())
+
+        @self.app.route('/clicker_post')
+        def clicker_post():
+            return flask.render_template('clicker_post.j2', clicks=self.get_clicks())
 
         @self.app.route('/date')
         def show_date():
