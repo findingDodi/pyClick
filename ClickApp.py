@@ -19,13 +19,18 @@ class ClickApp:
 
         @self.app.route('/')
         def index():
-            return flask.render_template('home.j2', clicks=self.get_clicks())
+            return flask.render_template('home.j2')
+
         @self.app.route('/clicker_js')
         def clicker_js():
             return flask.render_template('clicker_js.j2', clicks=self.get_clicks())
 
-        @self.app.route('/clicker_post')
+        @self.app.route('/clicker_post', methods=['GET', 'POST'])
         def clicker_post():
+            increment_clicks_post = flask.request.form.get("increment-clicks-post")
+            print(increment_clicks_post)
+            if increment_clicks_post:
+                self.increment_clicks()
             return flask.render_template('clicker_post.j2', clicks=self.get_clicks())
 
         @self.app.route('/date')
