@@ -18,11 +18,11 @@ class ClickApp:
 
         @self.app.route('/')
         def index():
-            return flask.render_template('home.j2')
+            return flask.render_template('home.html')
 
         @self.app.route('/clicker_js')
         def clicker_js():
-            return flask.render_template('clicker_js.j2', clicks=self.get_clicks())
+            return flask.render_template('clickapp/clicker_js.html', clicks=self.get_clicks())
 
         @self.app.route('/clicker_post', methods=['GET', 'POST'])
         def clicker_post():
@@ -30,7 +30,7 @@ class ClickApp:
             if increment_clicks_post:
                 self.increment_clicks()
 
-            return flask.render_template('clicker_post.j2', clicks=self.get_clicks())
+            return flask.render_template('clickapp/clicker_post.html', clicks=self.get_clicks())
 
         @self.app.route('/date')
         def show_date():
@@ -55,6 +55,7 @@ class ClickApp:
             file_handle = open(path, "r")
             file_content = file_handle.read()
             file_handle.close()
+
             return file_content
 
     def get_clicks(self):
